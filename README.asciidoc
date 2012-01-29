@@ -1,0 +1,4 @@
+libvimregex
+-----------
+
+C library providing Vim's flavour of regex - Vim Everywhere!
