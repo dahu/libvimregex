@@ -6,13 +6,13 @@ C library providing Vim's flavour of regex - Vim Everywhere!
 Architecture
 ~~~~~~~~~~~~
 
-                Vim-flavoured PEG           Ruby-flavoured Regex
+ |               Vim-flavoured PEG           Ruby-flavoured Regex
 
-   Vim                  |                            |                    Rainbows
-  Regex   --->        --|--          --->          --|--           --->      &
-                        |                            |                    Unicorns
+ |  Vim                  |                            |                    Rainbows
+ | Regex   --->        --|--          --->          --|--           --->      &
+ |                       |                            |                    Unicorns
 
-                     gazelle                     Oniguruma
+ |                    gazelle                     Oniguruma
 
 libvimregex uses the gazelle PEG parser generator to convert Vim flavoured
 regexes into ruby-flavoured regexes which are then evaluated by the oniguruma
