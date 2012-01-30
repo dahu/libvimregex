@@ -1,0 +1,4 @@
+regexp            <- legal_flag? eor
+legal_flag        <- ignore_comb_chars
+ignore_comb_chars <- '\\Z'
+eor               <- '$'
