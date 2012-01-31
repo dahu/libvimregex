@@ -9,11 +9,11 @@
 #include "libvimregexparser.c"
 
 /* for initial framework tests, original oniguruma regexes used here */
-int vimre_match(unsigned char *pattern, unsigned char *string, OnigRegion *region) {
-  return vimreo_match(pattern, string, region);
+int vimre_vmatch(unsigned char *pattern, unsigned char *string, OnigRegion *region) {
+  return vimre_omatch(pattern, string, region);
 }
 
-int vimreo_match(unsigned char *pattern, unsigned char *string, OnigRegion *region) {
+int vimre_omatch(unsigned char *pattern, unsigned char *string, OnigRegion *region) {
   int r;
   unsigned char *start, *range, *end;
   regex_t* reg;
