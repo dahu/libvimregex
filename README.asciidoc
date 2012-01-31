@@ -6,7 +6,27 @@ C library providing Vim's flavour of regex - Vim Everywhere!
 Architecture
 ~~~~~~~~~~~~
 
-libvimregex uses the gazelle PEG parser generator to convert Vim flavoured
+libvimregex uses Ford's peg/leg parser generator to convert Vim flavoured
 regexes into ruby-flavoured regexes which are then evaluated by the oniguruma
 regular expressiono engine.
+
+Status
+~~~~~~
+
+Achieved simple proof of concept of all required parts.
+
+The code should be looked at in that light - it is *not* clean or well designed.
+It is indeed... goatse. Some ugly shorthands have been made in the knowledge
+that no matter how well *I* wrote the code, it wouldn't be what the standards
+required.
+
+Pending cleanup by one of our C fairies. (Hint! mhi^ :-) )
+
+Vendor
+~~~~~~
+
+The Makefile links against two libraries in the vendor tree:
+
+* Oniguruma 5.9.2
+* Peg 0.1.7
 
