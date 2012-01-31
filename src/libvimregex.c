@@ -6,11 +6,47 @@
 #include <string.h>
 #include "oniguruma.h"
 #include "libvimregex.h"
+
+
+/* crude */
+int copied_pattern = 0;
+unsigned char *vim_pattern = NULL;
+unsigned char *onig_pattern = NULL;
+unsigned char o_pattern[1024];
+int o_pos = -1;
+
+void add_to_pattern(unsigned char *s) {
+  size_t len = strlen(s);
+  if (o_pos == -1) {
+    o_pattern[0] = '\0';
+  }
+  strncat(o_pattern, s, len);
+  o_pos += len;
+}
+
+#define YY_INPUT(buf, result, max)          \
+{                                           \
+  if (!copied_pattern) {                    \
+    result= strlen(vim_pattern);            \
+    memcpy(buf, vim_pattern, result + 1);   \
+    copied_pattern = 1;                     \
+  }                                         \
+}
+
+/*#define YY_DEBUG*/
 #include "libvimregexparser.c"
 
-/* for initial framework tests, original oniguruma regexes used here */
+
 int vimre_vmatch(unsigned char *pattern, unsigned char *string, OnigRegion *region) {
-  return vimre_omatch(pattern, string, region);
+  copied_pattern = 0;
+  vim_pattern = pattern;
+  while (yyparse())
+    ;
+  /* should collect resulting onig_pattern from previous parse */
+  /* for now, fudge to the original */
+  /*onig_pattern = pattern;*/
+  onig_pattern = o_pattern;
+  return vimre_omatch(onig_pattern, string, region);
 }
 
 int vimre_omatch(unsigned char *pattern, unsigned char *string, OnigRegion *region) {

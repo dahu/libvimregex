@@ -1,4 +1,2 @@
-regexp            <- legal_flag? eor
-legal_flag        <- ignore_comb_chars
-ignore_comb_chars <- '\\Z'
-eor               <- '$'
+regexp            <- ordinary_char  { add_to_pattern(yytext); }  !.
+ordinary_char     <- < . >
